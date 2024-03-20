@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fade {
+  transition: opacity 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  /* border-radius: 20px; */
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+.bg-container {
+  background-color: #252525;
+  opacity: 1;
+  background-image: radial-gradient(#0093ff 1px, transparent 1px),
+    radial-gradient(#0093ff 1px, #252525 1px);
+  background-size: 40px 40px;
+  background-position:
+    0 0,
+    20px 20px;
+}
