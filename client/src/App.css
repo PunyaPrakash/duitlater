@@ -37,7 +37,7 @@
 }
 
 .bg-container {
-  background-color: #252525;
+  background-color: #757575;
   opacity: 1;
   background-image: radial-gradient(#0093ff 1px, transparent 1px),
     radial-gradient(#0093ff 1px, #252525 1px);
