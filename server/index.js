@@ -18,7 +18,7 @@ async function dbConnect() {
   const db = mongoose.connection;
 
   db.on("connected", () => {
-    console.log(`Mongoose connected to ${process.env.MONGO_URI}`);
+    console.log("Connected to database");
   });
 
   db.on("error", (err) => {
