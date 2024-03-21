@@ -1,9 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const router = require("./Routes/router");
 require("dotenv").config();
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 async function dbConnect() {
   mongoose.connect(process.env.MONGO_URI, {
@@ -27,6 +31,8 @@ async function dbConnect() {
 }
 
 dbConnect();
+
+app.use("/api", router);
 
 const port = process.env.PORT || 8080;
 
