@@ -5,7 +5,7 @@ const signUpHandler = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ username });
+    let existingUser = await User.findOne({ username });
 
     if (existingUser) {
       return res.status(400).json({ message: "Username already exists." });

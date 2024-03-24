@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { FaChevronUp } from 'react-icons/fa';
 import LogInForm from './components/LogInForm';
 import SignUpForm from './components/SignUpForm';
 import logoSrc from './assets/logoNameBlack.svg';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -19,6 +21,7 @@ function App() {
 
   return (
     <div className="bg-container">
+      <ToastContainer />
       <div className="flex justify-center items-center h-screen">
         <div className="flex items-center h-[30rem] rounded-2xl bg-[#2081c6] shadow-2xl overflow-hidden transition-all duration-500">
           <div className="flex-col h-full bg-white items-center justify-center p-2 hidden md:flex">
