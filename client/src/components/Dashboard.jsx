@@ -21,8 +21,8 @@ function Dashboard() {
     setTaskText('');
   };
   return (
-    <div className="bg-container">
-      <nav className="sticky flex p-2 justify-between items-center text-white font-semibold h-auto w-screen bg-opacity-90 backdrop-filter backdrop-blur-sm z-20">
+    <div className="bg-gray-800 min-h-screen">
+      <nav className="sticky flex p-2 justify-between items-center text-white font-semibold h-auto w-screen bg-gray-900">
         <div className="text-white text-2xl p-1 pl-4">
           <img src={logoSrc} alt="Logo" className="h-8 pr-2" />
         </div>
@@ -44,7 +44,7 @@ function Dashboard() {
         </div>
       )}
       <div className="flex justify-center h-full z-20">
-        <div className="flex flex-col p-4 mt-3 rounded-xl items-center bg-slate-800 bg-opacity-90 text-white  w-[95%] backdrop-filter backdrop-blur-sm">
+        <div className="flex flex-col p-4 mt-3 rounded-xl items-center bg-cyan-950 bg-opacity-70 text-white  w-[95%] backdrop-filter backdrop-blur-[2px]">
           <div className="flex m-4 justify-evenly items-center w-full ">
             {/* Add Task Here */}
             <InputBox

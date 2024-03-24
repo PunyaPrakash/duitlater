@@ -2,13 +2,19 @@ import { FaGoogle } from 'react-icons/fa';
 import InputBox from './InputBox';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function LogInForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    setIsValid(emailValue.trim() !== '' && passwordValue.trim() !== '');
+  }, [emailValue, passwordValue]);
   const handleSignIn = async () => {
     setLoading(true);
     console.log('running handleSignIn');
@@ -20,31 +26,20 @@ function LogInForm() {
       .then(() => {
         console.log('SUCCESS');
         setLoading(false);
+        navigate('/dashboard');
       })
       .catch((e) => {
         setLoading(false);
+        console.log(e);
         let msg = '';
-        if ('data' in window) {
+        if (e.response && e.response.data && e.response.data.message) {
           msg = e.response.data.message;
         } else {
           msg = e.message;
         }
-        setErrorMessage(msg);
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 3000);
+        toast.error(msg);
       });
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (errorMessage) {
-        setErrorMessage('');
-      }
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [errorMessage]);
 
   return (
     <>
@@ -56,7 +51,7 @@ function LogInForm() {
           type="email"
           name="email"
           placeholder="Email"
-          required="true"
+          required={true}
           value={emailValue}
           onChange={(e) => setEmailValue(e.target.value)}
         />
@@ -65,31 +60,23 @@ function LogInForm() {
           type="password"
           name="password"
           placeholder="Password"
-          required="true"
+          required={true}
           value={passwordValue}
           onChange={(e) => setPasswordValue(e.target.value)}
         />
         <button
-          className="p-2 px-5 mt-4 m-2 rounded-full text-base font-semibold border border-gray-600 text-center bg-gray-100-300 text-white hover:bg-gray-200 hover:text-black transition-all"
+          className="p-2 px-5 m-2 rounded-full text-base font-semibold border border-gray-200 text-center bg-gray-100-300 text-white hover:bg-gray-200 hover:text-black transition-all disabled:hover:bg-transparent disabled:hover:text-gray-400 disabled:hover:cursor-not-allowed disabled:hover:border-gray-400"
           type="submit"
-          onClick={handleSignIn}>
+          onClick={handleSignIn}
+          disabled={!isValid || loading}>
           {loading ? 'Loading' : 'Sign In'}
         </button>
-        <div className="text-white justify-center items-center flex">
-          or with{' '}
-          <button className="p-2 ml-2 text-lg border border-slate-500 rounded-full bg-gray-200 text-black transition-all">
-            <FaGoogle />
-          </button>
-        </div>
       </form>
-      <div
-        className="text-red-200"
-        style={{
-          opacity: errorMessage ? 1 : 0,
-          transition: errorMessage ? 'opacity 0.3s ease' : 'none', // Apply transition only when errorMessage is present
-          height: '1.5rem'
-        }}>
-        {errorMessage}
+      <div className="text-white justify-center items-center flex">
+        or with{' '}
+        <button className="p-2 hover:ml-1 text-lg rounded-full hover:bg-gray-200 hover:text-black transition-all ease-in ">
+          <FaGoogle />
+        </button>
       </div>
     </>
   );
