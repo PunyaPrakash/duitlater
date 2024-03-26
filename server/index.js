@@ -9,6 +9,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 const corsOptions = {
   origin: "http://localhost:5173",
   optionsSuccessStatus: 200,
@@ -16,7 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 async function dbConnect() {
-  mongoose.connect(process.env.MONGO_URI, {
+  mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -40,9 +41,6 @@ dbConnect();
 
 app.use("/api", router);
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server started on https://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server started on https://localhost:${process.env.PORT}`);
 });
-// Hello
